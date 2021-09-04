@@ -52,23 +52,4 @@ Landing.getInitialProps = async (ctx) => {
     return { users: json.results }
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`https://randomuser.me/api/?results=5`)
-  const users = await res.json()
-
-
-  if (!users) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: { users: users.results }, // will be passed to the page component as props
-  }
-}
-
 export default Landing;
