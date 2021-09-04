@@ -32,6 +32,13 @@ const Container = styled.div`
   border-radius: 12px;
   box-shadow: 0 0 8px 2px rgba(0,0,0, .25);
   flex-direction: column;
+  @media(max-width: 939px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vmax;
+    border-radius: 0;
+  }
 `;
 
 const Content = styled.div`
@@ -51,5 +58,6 @@ Landing.getInitialProps = async (ctx) => {
     const json = await res.json()
     return { users: json.results }
 }
+
 
 export default Landing;
