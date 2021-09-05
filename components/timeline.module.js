@@ -11,7 +11,7 @@ const Timeline = ({posts}) => {
     // este useEffect será executado uma vez
     // semelhante ao componentDidMount()
     useEffect(() => {
-        fetch("https://picsum.photos/v2/list?page=1&limit=50")
+        fetch("https://picsum.photos/v2/list?page=1&limit=25")
         .then(res => res.json())
         .then(
             (result) => {
