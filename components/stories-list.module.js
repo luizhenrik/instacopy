@@ -30,7 +30,7 @@ const StoriesList = () => {
             <StoriesListModule>
                 {users.map((user, index) => (
                     <StoriesListModule__item key={index} title={user.login.username}>
-                        <StoriesListModule__itemImage src={user.picture.thumbnail} />
+                        <StoriesListModule__itemImage loading={'lazy'} src={user.picture.thumbnail} />
                         <StoriesListModule__itemUsername>{user.login.username}</StoriesListModule__itemUsername>
                     </StoriesListModule__item>
                 ))}

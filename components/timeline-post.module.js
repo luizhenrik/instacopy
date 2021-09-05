@@ -14,7 +14,7 @@ const TimelinePost = ({user, photo}) => {
                     </TimelinePost__avatar>
 
                     <TimelinePost__infosHeader>
-                        <TimelinePost__headerUsername>{user.login.username}</TimelinePost__headerUsername>
+                        <TimelinePost__headerUsername loading={'lazy'}>{user.login.username}</TimelinePost__headerUsername>
                     </TimelinePost__infosHeader>
 
                     <TimelinePost__headerMenu>
@@ -23,7 +23,7 @@ const TimelinePost = ({user, photo}) => {
                 </TimelinePost__header>
 
                 <TimelinePost__main>
-                    <TimelinePost__mainImage alt={user.login.username} src={photo.download_url}/>
+                    <TimelinePost__mainImage loading={'lazy'} alt={user.login.username} src={photo.download_url}/>
                 </TimelinePost__main>
 
                 <TimelinePost__actions>
