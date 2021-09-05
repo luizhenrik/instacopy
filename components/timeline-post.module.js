@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisV, faHeart, faComment, faPaperPlane, faBookmark } from '@fortawesome/free-solid-svg-icons';
 
 const TimelinePost = ({user, photo}) => {
     if(!photo) {
@@ -25,6 +25,23 @@ const TimelinePost = ({user, photo}) => {
                 <TimelinePost__main>
                     <TimelinePost__mainImage alt={user.login.username} src={photo.download_url}/>
                 </TimelinePost__main>
+
+                <TimelinePost__actions>
+                    <TimelinePost__actionsItem>
+                        <FontAwesomeIcon icon={faHeart} />
+                    </TimelinePost__actionsItem>
+                    <TimelinePost__actionsItem>
+                        <FontAwesomeIcon icon={faComment} />
+                    </TimelinePost__actionsItem>
+                    <TimelinePost__actionsItem>
+                        <FontAwesomeIcon icon={faPaperPlane} />
+                    </TimelinePost__actionsItem>
+                    <TimelinePost__actionsItem className={'is-align-right'}>
+                        <FontAwesomeIcon icon={faBookmark} />
+                    </TimelinePost__actionsItem>
+
+                    <TimelinePost__actionsText>Curtido por <strong>NomeDeUSer</strong> e <strong>outras pessoas</strong></TimelinePost__actionsText>
+                </TimelinePost__actions>
             </TimelinePost__item>
         )
     }
@@ -120,6 +137,42 @@ const TimelinePost__mainImage = styled.img`
     right: 0;
     bottom: 0;
     object-fit: cover;
+`;
+
+const TimelinePost__actions = styled.div`
+    width: 100%;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    align-items: center; 
+    justify-content: space-between;
+`;
+
+let size_actionItem = 24;
+let font_size_actionItem = size_actionItem * 80 / 100;
+const TimelinePost__actionsItem = styled.a`
+    width: ${size_actionItem}px;
+    height: ${size_actionItem}px;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: ${font_size_actionItem}px;
+    &:not(:first-child) {
+        margin-left: 15px;
+    }
+
+    &.is-align-right {
+        margin-left: auto;
+    }
+`;
+
+const TimelinePost__actionsText = styled.span`
+    width: 100%;
+    float: left;
+    font-size: 12px;
+    margin-top: 5px;
 `;
 
 export default TimelinePost;
