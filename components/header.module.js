@@ -32,7 +32,7 @@ const HeaderModule = styled.div`
 `;
 
 const HeaderModule__logo = styled.a`
-    width: 125px;
+    width: 90px;
     float: left;
     /* background-color: red; */
     margin-right: auto;
@@ -44,7 +44,7 @@ const HeaderModule__logoImage = styled.img`
     height: auto;
 `;
 
-let size_item = 36;
+let size_item = 26;
 let font_size_item = size_item * 80 / 100;
 const HeaderModule__item = styled.a`
     width: ${size_item}px;

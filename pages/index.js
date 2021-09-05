@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import NavBarBottom from '../components/navbar-bottom.module';
 import Header from '../components/header.module';
 import StoriesList from '../components/stories-list.module';
+import Timeline from '../components/timeline.module';
 
 const Landing = ({users}) => {
 
@@ -11,7 +12,7 @@ const Landing = ({users}) => {
       <Header />
       <Content>
         <StoriesList users={users}/>
-        <Title>My First Next.js Page</Title>
+        <Timeline posts={users} />
       </Content>
 
       <NavBarBottom />
@@ -22,7 +23,7 @@ const Landing = ({users}) => {
 const Container = styled.div`
   width: 390px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 100%;
@@ -33,10 +34,11 @@ const Container = styled.div`
   box-shadow: 0 0 8px 2px rgba(0,0,0, .25);
   flex-direction: column;
   @media(max-width: 939px) {
+    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vmax;
+    height: 100%;
     border-radius: 0;
   }
 `;

@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 const StoriesList = ({users}) => {
-console.log(users);
     return (
         <StoriesListModule>
             {users.map((user) => (
-                <StoriesListModule__item title={user.login.username}>
+                <StoriesListModule__item key={user.login.username} title={user.login.username}>
                     <StoriesListModule__itemImage src={user.picture.thumbnail} />
                 </StoriesListModule__item>
             ))}
@@ -23,7 +22,7 @@ const StoriesListModule = styled.div`
     white-space: nowrap;
 `;
 
-let size_item = 75;
+let size_item = 55;
 const StoriesListModule__item = styled.a`
     width: ${size_item}px;
     flex: 0 1 ${size_item}px;

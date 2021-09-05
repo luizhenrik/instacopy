@@ -34,7 +34,7 @@ const NavBar = styled.div`
     padding: 10px;
 `;
 
-let size_item = 36;
+let size_item = 26;
 let font_size_item = size_item * 80 / 100;
 const NavBar__item = styled.a`
     width: ${size_item}px;
