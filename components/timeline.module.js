@@ -5,43 +5,39 @@ import TimelinePost from "./timeline-post.module";
 const Timeline = ({posts}) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
+    const [photos, setPhotos] = useState([]);
     
     // Nota: O array [] deps vazio significa
     // este useEffect será executado uma vez
     // semelhante ao componentDidMount()
-    useEffect(() => {
-        fetch("https://picsum.photos/v2/list?page=1&limit=25")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setIsLoaded(true);
-                setItems(result);
-            },
-            // Nota: é importante lidar com errros aqui
-            // em vez de um bloco catch() para não receber
-            // exceções de erros reais nos componentes.
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-            }
-            )
-        }, [])
-        
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
-            return (
-                <TimelineModule>
-                    {posts.map((post, index) => (
-                        <TimelinePost key={post.login.username} post={post} photo={items[index]} />
-                    ))}
-                </TimelineModule>
-            );
+    useEffect(async () => {
+        const req = await fetch("https://picsum.photos/v2/list?page=1&limit=25");
+        const res = await req.json();
+
+        if(res) {
+            setIsLoaded(true);
+            setPhotos(res);
+        }else {
+            setIsLoaded(true);
+            setError(error);
         }
+    }, [])
+        
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+        return <div>Loading...</div>;
+    } else {
+        // console.log(photos);
+        return (
+            <TimelineModule>
+                {posts.map((post, index) => (
+                    <TimelinePost key={post.login.username} post={post} photo={photos[index]} />
+                ))}
+            </TimelineModule>
+        );
     }
+}
             
 const TimelineModule = styled.div`
 width: 100%;

@@ -3,27 +3,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 const TimelinePost = ({post, photo}) => {
-    return(
-        <TimelinePost__item>
-            <TimelinePost__header>
-                <TimelinePost__avatar title={post.login.username}>
-                    <TimelinePost__avatarImage alt={post.login.username} src={post.picture.thumbnail} />
-                </TimelinePost__avatar>
+    if(!photo) {
+        return false;
+    }else {
+        return(
+            <TimelinePost__item>
+                <TimelinePost__header>
+                    <TimelinePost__avatar title={post.login.username}>
+                        <TimelinePost__avatarImage alt={post.login.username} src={post.picture.thumbnail} />
+                    </TimelinePost__avatar>
 
-                <TimelinePost__infosHeader>
-                    <TimelinePost__headerUsername>{post.login.username}</TimelinePost__headerUsername>
-                </TimelinePost__infosHeader>
+                    <TimelinePost__infosHeader>
+                        <TimelinePost__headerUsername>{post.login.username}</TimelinePost__headerUsername>
+                    </TimelinePost__infosHeader>
 
-                <TimelinePost__headerMenu>
-                    <FontAwesomeIcon icon={faEllipsisH} />
-                </TimelinePost__headerMenu>
-            </TimelinePost__header>
+                    <TimelinePost__headerMenu>
+                        <FontAwesomeIcon icon={faEllipsisH} />
+                    </TimelinePost__headerMenu>
+                </TimelinePost__header>
 
-            <TimelinePost__main>
-                <TimelinePost__mainImage alt={post.login.username} src={photo.download_url}/>
-            </TimelinePost__main>
-        </TimelinePost__item>
-    )
+                <TimelinePost__main>
+                    <TimelinePost__mainImage alt={post.login.username} src={photo.download_url}/>
+                </TimelinePost__main>
+            </TimelinePost__item>
+        )
+    }
 }
 
 const TimelinePost__item = styled.div`
