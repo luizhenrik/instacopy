@@ -51,10 +51,6 @@ const Content = styled.div`
   flex: 1 1 10em;
 `;
 
-const Title = styled.h1`
-  color: red;
-`;
-
 Landing.getInitialProps = async (ctx) => {
     const res = await fetch('https://randomuser.me/api/?results=25')
     const json = await res.json()
