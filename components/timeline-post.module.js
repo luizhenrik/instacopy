@@ -1,29 +1,29 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
-const TimelinePost = ({post, photo}) => {
+const TimelinePost = ({user, photo}) => {
     if(!photo) {
         return false;
     }else {
         return(
             <TimelinePost__item>
                 <TimelinePost__header>
-                    <TimelinePost__avatar title={post.login.username}>
-                        <TimelinePost__avatarImage alt={post.login.username} src={post.picture.thumbnail} />
+                    <TimelinePost__avatar title={user.login.username}>
+                        <TimelinePost__avatarImage alt={user.login.username} src={user.picture.thumbnail} />
                     </TimelinePost__avatar>
 
                     <TimelinePost__infosHeader>
-                        <TimelinePost__headerUsername>{post.login.username}</TimelinePost__headerUsername>
+                        <TimelinePost__headerUsername>{user.login.username}</TimelinePost__headerUsername>
                     </TimelinePost__infosHeader>
 
                     <TimelinePost__headerMenu>
-                        <FontAwesomeIcon icon={faEllipsisH} />
+                        <FontAwesomeIcon icon={faEllipsisV} />
                     </TimelinePost__headerMenu>
                 </TimelinePost__header>
 
                 <TimelinePost__main>
-                    <TimelinePost__mainImage alt={post.login.username} src={photo.download_url}/>
+                    <TimelinePost__mainImage alt={user.login.username} src={photo.download_url}/>
                 </TimelinePost__main>
             </TimelinePost__item>
         )
@@ -48,7 +48,7 @@ const TimelinePost__header = styled.div`
     padding: 10px;
 `;
 
-let size_item = 41;
+let size_item = 36;
 const TimelinePost__avatar = styled.a`
     width: ${size_item}px;
     flex: 0 1 ${size_item}px;
@@ -82,10 +82,10 @@ const TimelinePost__infosHeader = styled.div`
 const TimelinePost__headerUsername = styled.h3`
     font-weight: 700;
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
 `;
 
-let size_headerMenu = 26;
+let size_headerMenu = 18;
 let font_size_headerMenu = size_headerMenu * 80 / 100;
 const TimelinePost__headerMenu = styled.a`
     width: ${size_headerMenu}px;

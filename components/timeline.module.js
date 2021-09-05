@@ -2,21 +2,35 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import TimelinePost from "./timeline-post.module";
 
-const Timeline = ({posts}) => {
+const Timeline = () => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [photos, setPhotos] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    const limit = 5;
     
     // Nota: O array [] deps vazio significa
     // este useEffect será executado uma vez
     // semelhante ao componentDidMount()
     useEffect(async () => {
-        const req = await fetch("https://picsum.photos/v2/list?page=1&limit=25");
-        const res = await req.json();
+        const photosReq = await fetch(`https://picsum.photos/v2/list?page=1&limit=${limit}`);
+        const photosList = await photosReq.json();
 
-        if(res) {
+        const usersReq = await fetch(`https://randomuser.me/api/?results=${limit}`);
+        const usersList = await usersReq.json();
+
+        if(photosList) {
             setIsLoaded(true);
-            setPhotos(res);
+            setPhotos(photosList);
+        }else {
+            setIsLoaded(true);
+            setError(error);
+        }
+
+        if(usersList) {
+            setIsLoaded(true);
+            setUsers(usersList.results);
         }else {
             setIsLoaded(true);
             setError(error);
@@ -31,8 +45,8 @@ const Timeline = ({posts}) => {
         // console.log(photos);
         return (
             <TimelineModule>
-                {posts.map((post, index) => (
-                    <TimelinePost key={post.login.username} post={post} photo={photos[index]} />
+                {users.map((user, index) => (
+                    <TimelinePost key={index} user={user} photo={photos[index]} />
                 ))}
             </TimelineModule>
         );

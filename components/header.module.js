@@ -44,7 +44,7 @@ const HeaderModule__logoImage = styled.img`
     height: auto;
 `;
 
-let size_item = 26;
+let size_item = 28;
 let font_size_item = size_item * 80 / 100;
 const HeaderModule__item = styled.a`
     width: ${size_item}px;

@@ -5,14 +5,14 @@ import Header from '../components/header.module';
 import StoriesList from '../components/stories-list.module';
 import Timeline from '../components/timeline.module';
 
-const Landing = ({users}) => {
+const Landing = () => {
 
   return (
     <Container>
       <Header />
       <Content>
-        <StoriesList users={users}/>
-        <Timeline posts={users} />
+        <StoriesList />
+        <Timeline />
       </Content>
 
       <NavBarBottom />
@@ -50,12 +50,6 @@ const Content = styled.div`
   flex-direction: column;
   flex: 1 1 10em;
 `;
-
-Landing.getInitialProps = async (ctx) => {
-    const res = await fetch('https://randomuser.me/api/?results=25')
-    const json = await res.json()
-    return { users: json.results }
-}
 
 
 export default Landing;
