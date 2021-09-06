@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
+import StoriesList from './stories-list.module';
 import TimelinePost from "./timeline-post.module";
 
 const Timeline = () => {
@@ -45,6 +46,8 @@ const Timeline = () => {
         // console.log(photos);
         return (
             <TimelineModule>
+                <StoriesList />
+                
                 {users.map((user, index) => (
                     <TimelinePost key={index} user={user} photo={photos[index]} />
                 ))}

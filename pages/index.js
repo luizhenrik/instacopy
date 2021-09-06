@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import NavBarBottom from '../components/navbar-bottom.module';
 import Header from '../components/header.module';
-import StoriesList from '../components/stories-list.module';
 import Timeline from '../components/timeline.module';
 
 const Landing = () => {
@@ -10,8 +9,8 @@ const Landing = () => {
   return (
     <Container>
       <Header />
+      
       <Content>
-        <StoriesList />
         <Timeline />
       </Content>
 

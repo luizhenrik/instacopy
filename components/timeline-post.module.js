@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV, faHeart, faComment, faPaperPlane, faBookmark } from '@fortawesome/free-solid-svg-icons';
 
+import CommentField from './comment-field.module'
+
 const TimelinePost = ({user, photo}) => {
     if(!photo) {
         return false;
@@ -42,6 +44,9 @@ const TimelinePost = ({user, photo}) => {
 
                     <TimelinePost__actionsText>Curtido por <strong>NomeDeUSer</strong> e <strong>outras pessoas</strong></TimelinePost__actionsText>
                 </TimelinePost__actions>
+
+                <CommentField user={user} />
+                <TimelinePost__posted>há 5 minutos <a>Ver tradução</a></TimelinePost__posted>
             </TimelinePost__item>
         )
     }
@@ -173,6 +178,32 @@ const TimelinePost__actionsText = styled.span`
     float: left;
     font-size: 12px;
     margin-top: 5px;
+`;
+
+const TimelinePost__posted = styled.span`
+    width: 100%;
+    float: left;
+    font-size: 10px;
+    padding: 10px;
+    color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+
+    a {
+        color: #000;
+        display: flex;
+        align-items: center;
+
+        &:before {
+            content: '';
+            width: 3px;
+            height: 3px;
+            display: inline-block;
+            margin: 0 5px;
+            border-radius: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    }
 `;
 
 export default TimelinePost;
