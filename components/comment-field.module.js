@@ -1,13 +1,22 @@
+import { Context } from "../context/common.context";
+
 import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from "react";
 
 const CommentField = ({user}) => {
+    const {myUser} = useContext(Context);
     return (
         <CommentFieldModule>
             <CommentFieldModule__avatar>
-                <CommentFieldModule__avatarImage src={user.picture.thumbnail} />
+                <CommentFieldModule__avatarImage src={myUser.avatar} />
             </CommentFieldModule__avatar>
 
             <CommentFieldModule__field type={'text'} placeholder={'Adicione um comentário...'} />
+            <CommentFieldModule__buttonReact>
+                <FontAwesomeIcon icon={faPlusCircle} />
+            </CommentFieldModule__buttonReact>
         </CommentFieldModule>
     );
 }
@@ -60,6 +69,20 @@ const CommentFieldModule__field = styled.input`
     &::placeholder {
         opacity: 0.7;
     }
+`;
+
+let size_reactions = 26;
+const CommentFieldModule__buttonReact = styled.a`
+    width: ${size_reactions}px;
+    flex: 0 1 ${size_reactions}px;
+    height: ${size_reactions}px;
+    float: left;
+    position: relative;
+    margin-left: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export default CommentField;

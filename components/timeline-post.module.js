@@ -3,20 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV, faHeart, faComment, faPaperPlane, faBookmark } from '@fortawesome/free-solid-svg-icons';
 
 import CommentField from './comment-field.module'
+import CommentResume from './comment-resume.module'
 
-const TimelinePost = ({user, photo}) => {
-    if(!photo) {
-        return false;
-    }else {
+const TimelinePost = ({post}) => {
         return(
             <TimelinePost__item>
                 <TimelinePost__header>
-                    <TimelinePost__avatar title={user.login.username}>
-                        <TimelinePost__avatarImage alt={user.login.username} src={user.picture.thumbnail} />
+                    <TimelinePost__avatar title={post.username}>
+                        <TimelinePost__avatarImage alt={post.username} src={post.avatar} />
                     </TimelinePost__avatar>
 
                     <TimelinePost__infosHeader>
-                        <TimelinePost__headerUsername loading={'lazy'}>{user.login.username}</TimelinePost__headerUsername>
+                        <TimelinePost__headerUsername loading={'lazy'}>{post.username}</TimelinePost__headerUsername>
                     </TimelinePost__infosHeader>
 
                     <TimelinePost__headerMenu>
@@ -25,7 +23,7 @@ const TimelinePost = ({user, photo}) => {
                 </TimelinePost__header>
 
                 <TimelinePost__main>
-                    <TimelinePost__mainImage loading={'lazy'} alt={user.login.username} src={photo.download_url}/>
+                    <TimelinePost__mainImage loading={'lazy'} alt={post.username} src={post.data.image}/>
                 </TimelinePost__main>
 
                 <TimelinePost__actions>
@@ -45,11 +43,12 @@ const TimelinePost = ({user, photo}) => {
                     <TimelinePost__actionsText>Curtido por <strong>NomeDeUSer</strong> e <strong>outras pessoas</strong></TimelinePost__actionsText>
                 </TimelinePost__actions>
 
-                <CommentField user={user} />
+                <CommentResume post={post} />
+
+                <CommentField />
                 <TimelinePost__posted>há 5 minutos <a>Ver tradução</a></TimelinePost__posted>
             </TimelinePost__item>
         )
-    }
 }
 
 const TimelinePost__item = styled.div`
@@ -58,6 +57,10 @@ const TimelinePost__item = styled.div`
 
     &:not(:first-child) {
         margin-top: 10px;
+    }
+
+    &:first-child {
+        border-top: 1px solid rgba(0,0,0,0.15);
     }
 `;
 

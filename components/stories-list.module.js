@@ -1,37 +1,74 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
+import AbortController from "abort-controller";
+import { Context } from "../context/common.context";
 
 const StoriesList = () => {
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [users, setUsers] = useState([]);
+    const { isLoaded, setIsLoaded } = useContext(Context);
+    const [stories, setStories] = useState([]);
+    const [api, setApi] = useState(0);
 
     const limit = 8;
 
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    Promise.all([
+    fetch(`https://randomuser.me/api/?results=${limit}`,{
+        method: "get",
+        signal: signal
+    }),
+    ]).then(async ([arrUsers]) => {
+        const noLoop = promise => promise;
+        setApi({
+            "users": {
+                "state": noLoop(arrUsers).ok,
+                "data": await noLoop(arrUsers).json()
+            }
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+
+    if(typeof api != "number" && (api.users.state)) {
+        // console.log("abort");
+        controller.abort();
+    }
+
     useEffect(async () => {
-        const res = await fetch(`https://randomuser.me/api/?results=${limit}`);
-        const usersList = await res.json();
+        if(typeof api != "number" && (api.users.state)) {
+            console.log("api stories ok");
 
-        if(usersList) {
-            setIsLoaded(true);
-            setUsers(usersList.results);
-        }else {
-            setIsLoaded(true);
-            setError(error);
+            const arrUsers = api.users.data.results;
+            
+            setStories([]);
+
+            arrUsers.map((user, index)=>{
+                const obj = {
+                    id: index,
+                    username: user.login.username,
+                    avatar: user.picture.thumbnail,
+                    id_user: user.login.salt
+                }
+
+                setStories(stories => [...stories, obj]);
+            });
         }
-    }, []);
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
+        if(stories.length == 0) {
+            setIsLoaded(true);
+        }
+    }, [api]);
+
+    if (!isLoaded) {
         return <div>Loading...</div>;
     } else {
         return (
             <StoriesListModule>
-                {users.map((user, index) => (
-                    <StoriesListModule__item key={index} title={user.login.username}>
-                        <StoriesListModule__itemImage loading={'lazy'} src={user.picture.thumbnail} />
-                        <StoriesListModule__itemUsername>{user.login.username}</StoriesListModule__itemUsername>
+                {stories.map((story, index) => (
+                    <StoriesListModule__item key={index} title={story.username}>
+                        <StoriesListModule__itemImage loading={'lazy'} src={story.avatar} />
+                        <StoriesListModule__itemUsername>{story.username}</StoriesListModule__itemUsername>
                     </StoriesListModule__item>
                 ))}
             </StoriesListModule>

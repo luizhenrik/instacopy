@@ -1,55 +1,92 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import AbortController from "abort-controller";
+import { Context } from "../context/common.context";
+
 import styled from "styled-components";
 import StoriesList from './stories-list.module';
 import TimelinePost from "./timeline-post.module";
 
 const Timeline = () => {
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [photos, setPhotos] = useState([]);
-    const [users, setUsers] = useState([]);
+    const {isLoaded, setIsLoaded} = useContext(Context);
+
+    const [posts, setPosts] = useState([]);
+    const [api, setApi] = useState(0);
 
     const limit = 5;
-    
-    // Nota: O array [] deps vazio significa
-    // este useEffect será executado uma vez
-    // semelhante ao componentDidMount()
+
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    Promise.all([
+    fetch(`https://picsum.photos/v2/list?limit=${limit}`,{
+        method: "get",
+        signal: signal
+    }),
+    fetch(`https://randomuser.me/api/?results=${limit}`,{
+        method: "get",
+        signal: signal
+    }),
+    ]).then(async ([arrPhotos, arrUsers]) => {
+        const noLoop = promise => promise;
+        setApi({
+            "photos": {
+                "state": noLoop(arrPhotos).ok,
+                "data": await noLoop(arrPhotos).json()
+            },
+            "users": {
+                "state": noLoop(arrUsers).ok,
+                "data": await noLoop(arrUsers).json()
+            }
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+
+    if(typeof api != "number" && (api.photos.state && api.users.state)) {
+        // console.log("abort");
+        controller.abort();
+    }
+
     useEffect(async () => {
-        const photosReq = await fetch(`https://picsum.photos/v2/list?page=1&limit=${limit}`);
-        const photosList = await photosReq.json();
-
-        const usersReq = await fetch(`https://randomuser.me/api/?results=${limit}`);
-        const usersList = await usersReq.json();
-
-        if(photosList) {
-            setIsLoaded(true);
-            setPhotos(photosList);
-        }else {
-            setIsLoaded(true);
-            setError(error);
-        }
-
-        if(usersList) {
-            setIsLoaded(true);
-            setUsers(usersList.results);
-        }else {
-            setIsLoaded(true);
-            setError(error);
-        }
-    }, [])
         
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
+        if(typeof api != "number" && (api.photos.state && api.users.state)) {
+            console.log("api timeline ok");
+
+            const arrUsers = api.users.data.results;
+            const arrPhotos = api.photos.data;
+            
+            setPosts([]);
+
+            arrUsers.map((user, index)=>{
+                const obj = {
+                    id: index,
+                    username: user.login.username,
+                    avatar: user.picture.thumbnail,
+                    id_user: user.login.salt,
+                    data: {
+                        image: arrPhotos[index].download_url,
+                        description: `Nostrud amet veniam aliqua duis consequat consectetur quis minim id fugiat.`
+                    }
+                }
+
+                setPosts(posts => [...posts, obj]);
+            });
+        }
+
+        if(posts.length == 0) {
+            setIsLoaded(true);
+        }
+    }, [api]);
+        
+    if (!isLoaded) {
         return <div>Loading...</div>;
     } else {
-        // console.log(photos);
         return (
             <TimelineModule>
                 <StoriesList />
                 
-                {users.map((user, index) => (
-                    <TimelinePost key={index} user={user} photo={photos[index]} />
+                {posts.map((post, index) => (
+                    <TimelinePost key={index} post={post} />
                 ))}
             </TimelineModule>
         );
@@ -66,7 +103,6 @@ align-items: flex-start;
 align-content: flex-start;
 max-height: 100%;
 overflow: auto;
-border-top: 1px solid rgba(0,0,0,0.15);
 `;
 
 export default Timeline;
