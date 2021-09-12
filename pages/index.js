@@ -32,6 +32,8 @@ const Container = styled.div`
   border-radius: 12px;
   box-shadow: 0 0 8px 2px rgba(0,0,0, .25);
   flex-direction: column;
+  transform: translate3d(0,0,0);
+
   @media(max-width: 939px) {
     width: 100%;
     position: fixed;
