@@ -1,8 +1,7 @@
-import { Context } from "../context/common.context";
+import { Context } from "@context/common.context";
 
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { AddCircleOutlineRounded } from '@material-ui/icons';
 import { useContext } from "react";
 
 const CommentField = ({user}) => {
@@ -15,7 +14,7 @@ const CommentField = ({user}) => {
 
             <CommentFieldModule__field type={'text'} placeholder={'Adicione um comentário...'} />
             <CommentFieldModule__buttonReact>
-                <FontAwesomeIcon icon={faPlusCircle} />
+                <AddCircleOutlineRounded />
             </CommentFieldModule__buttonReact>
         </CommentFieldModule>
     );

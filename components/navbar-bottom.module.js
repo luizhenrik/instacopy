@@ -1,25 +1,23 @@
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faPlayCircle, faShoppingBag, faUser } from '@fortawesome/free-solid-svg-icons';
-
+import { HomeOutlined, SearchOutlined, VideoLibraryOutlined, LocalMallOutlined, AccountCircleOutlined } from '@material-ui/icons';
 
 const NavBarBottom = () => {
     return (
         <NavBar>
             <NavBar__item>
-                <FontAwesomeIcon icon={faHome} />
+                <HomeOutlined />
             </NavBar__item>
             <NavBar__item>
-                <FontAwesomeIcon icon={faSearch} />
+                <SearchOutlined />
             </NavBar__item>
             <NavBar__item>
-                <FontAwesomeIcon icon={faPlayCircle} />
+                <VideoLibraryOutlined />
             </NavBar__item>
             <NavBar__item>
-                <FontAwesomeIcon icon={faShoppingBag} />
+                <LocalMallOutlined />
             </NavBar__item>
             <NavBar__item>
-                <FontAwesomeIcon icon={faUser} />
+                <AccountCircleOutlined />
             </NavBar__item>
         </NavBar>
     )

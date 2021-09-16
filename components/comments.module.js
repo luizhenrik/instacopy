@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import {useContext, ReactElement} from 'react';
-import { Context } from "../context/common.context";
+import { Context } from "@context/common.context";
 import { CloseOutlined } from '@material-ui/icons';
-
-// import { faTimes } from '@fortawesome/free-regular-svg-icons';
 
 const Comments = () => {
     const {isLoaded, setIsLoaded, modalCommentsOpened, setModalCommentsOpened} = useContext(Context);

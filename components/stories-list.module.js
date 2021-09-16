@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import AbortController from "abort-controller";
-import { Context } from "../context/common.context";
+import { Context } from "@context/common.context";
 
 const StoriesList = () => {
     const { isLoaded, setIsLoaded } = useContext(Context);

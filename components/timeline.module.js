@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext} from "react";
 import AbortController from "abort-controller";
-import { Context } from "../context/common.context";
+import { Context } from "@context/common.context";
 
 import styled from "styled-components";
-import StoriesList from './stories-list.module';
-import TimelinePost from "./timeline-post.module";
+import StoriesList from '@components/stories-list.module';
+import TimelinePost from "@components/timeline-post.module";
 
 const Timeline = () => {
     const {isLoaded, setIsLoaded} = useContext(Context);

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import NavBarBottom from '../components/navbar-bottom.module';
-import Header from '../components/header.module';
-import Timeline from '../components/timeline.module';
+import NavBarBottom from '@components/navbar-bottom.module';
+import Header from '@components/header.module';
+import Timeline from '@components/timeline.module';
 
 const Landing = () => {
 

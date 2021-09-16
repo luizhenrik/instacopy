@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import styled from "styled-components";""
-import Comments from "./comments.module";
-import { Context } from "../context/common.context";
+import Comments from "@components/comments.module";
+import { Context } from "@context/common.context";
 
 const CommentResume = ({post}) => {
     const {setModalCommentsOpened} = useContext(Context);

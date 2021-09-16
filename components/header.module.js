@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import { Head } from "next/document";
+import { AddBoxOutlined, FavoriteBorderOutlined, FavoriteOutlined, ForumOutlined } from '@material-ui/icons';
 
 const Header = () => {
     return (
@@ -11,13 +9,13 @@ const Header = () => {
             </HeaderModule__logo>
 
             <HeaderModule__item>
-                <FontAwesomeIcon icon={faPlusSquare} />
+                <AddBoxOutlined />
             </HeaderModule__item>
             <HeaderModule__item>
-                <FontAwesomeIcon icon={faHeart} />
+                <FavoriteBorderOutlined />
             </HeaderModule__item>
             <HeaderModule__item>
-                <FontAwesomeIcon icon={faComment} />
+                <ForumOutlined />
             </HeaderModule__item>
         </HeaderModule>
     );

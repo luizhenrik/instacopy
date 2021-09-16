@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV, faHeart, faComment, faPaperPlane, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { FavoriteBorderOutlined, FavoriteOutlined, FormatQuoteOutlined, BookmarkBorderOutlined, BookmarkOutlined, ChatOutlined, MoreVertOutlined} from '@material-ui/icons';
 
-import CommentField from './comment-field.module'
-import CommentResume from './comment-resume.module'
+import CommentField from '@components/comment-field.module'
+import CommentResume from '@components/comment-resume.module'
 
 const TimelinePost = ({post}) => {
         return(
@@ -18,7 +17,7 @@ const TimelinePost = ({post}) => {
                     </TimelinePost__infosHeader>
 
                     <TimelinePost__headerMenu>
-                        <FontAwesomeIcon icon={faEllipsisV} />
+                        <MoreVertOutlined />
                     </TimelinePost__headerMenu>
                 </TimelinePost__header>
 
@@ -28,16 +27,16 @@ const TimelinePost = ({post}) => {
 
                 <TimelinePost__actions>
                     <TimelinePost__actionsItem>
-                        <FontAwesomeIcon icon={faHeart} />
+                        <FavoriteBorderOutlined />
                     </TimelinePost__actionsItem>
                     <TimelinePost__actionsItem>
-                        <FontAwesomeIcon icon={faComment} />
+                        <ChatOutlined />
                     </TimelinePost__actionsItem>
                     <TimelinePost__actionsItem>
-                        <FontAwesomeIcon icon={faPaperPlane} />
+                        <FormatQuoteOutlined />
                     </TimelinePost__actionsItem>
                     <TimelinePost__actionsItem className={'is-align-right'}>
-                        <FontAwesomeIcon icon={faBookmark} />
+                        <BookmarkBorderOutlined />
                     </TimelinePost__actionsItem>
 
                     <TimelinePost__actionsText>Curtido por <strong>NomeDeUSer</strong> e <strong>outras pessoas</strong></TimelinePost__actionsText>
