@@ -6,10 +6,10 @@ import CommentResume from '@components/comment-resume.module'
 
 const TimelinePost = ({post}) => {
         return(
-            <TimelinePost__item>
+            <TimelinePost__item id={post.postId}>
                 <TimelinePost__header>
                     <TimelinePost__avatar title={post.username}>
-                        <TimelinePost__avatarImage alt={post.username} src={post.avatar} />
+                        <TimelinePost__avatarImage alt={post.username} src={post.user_avatar} />
                     </TimelinePost__avatar>
 
                     <TimelinePost__infosHeader>

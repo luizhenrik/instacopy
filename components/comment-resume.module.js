@@ -4,7 +4,7 @@ import Comments from "@components/comments.module";
 import { Context } from "@context/common.context";
 
 const CommentResume = ({post}) => {
-    const {setModalCommentsOpened} = useContext(Context);
+    const {modalCommentsOpened, setModalCommentsOpened} = useContext(Context);
 
     const descriptionOriginal = `<strong>${post.username}</strong> ${post.data.description} <br><a class="no-before js-open-comments">Ver todos comentarios</a>`;
 
@@ -28,18 +28,17 @@ const CommentResume = ({post}) => {
     const toggleResume = (e) => {
         // console.log(e.target.classList.contains("js-open-comments"));
         if(!isResumed || e.target.classList.contains("js-open-comments")) {
-            setModalCommentsOpened(true);
-            return false;
+            setModalCommentsOpened(post.postId);
+        }else {
+            setIsResumed(false);
+            e.currentTarget.innerHTML = descriptionOriginal;
         }
-
-        setIsResumed(false);
-        e.currentTarget.innerHTML = descriptionOriginal;
     }
 
     return (
         <>
         <CommentResumeModule isResumed={isResumed} onClick={toggleResume} dangerouslySetInnerHTML={{__html: description}} />
-        <Comments />
+        <Comments post={post}/>
         </>
     );
 };

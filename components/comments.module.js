@@ -1,20 +1,23 @@
 import styled from "styled-components";
 import {useContext, ReactElement} from 'react';
 import { Context } from "@context/common.context";
-import { CloseOutlined } from '@material-ui/icons';
+import { ArrowBackOutlined } from '@material-ui/icons';
 
-const Comments = () => {
-    const {isLoaded, setIsLoaded, modalCommentsOpened, setModalCommentsOpened} = useContext(Context);
+const Comments = ({post}) => {
+    const {isLoaded, setIsLoaded, setModalCommentsOpened} = useContext(Context);
 
     const toggleModal = () => {
-        setModalCommentsOpened(false);
+        setModalCommentsOpened(post.postId);
     }
 
     return (
-       <ModalCommentsModule className={(modalCommentsOpened) ? 'is-opened' : ''}>
-           <ButtonClose onClick={toggleModal}>
-               <CloseOutlined />
-           </ButtonClose>
+       <ModalCommentsModule id={`modalComments_${post.postId}`}>
+           <ModalCommentsModule__header>
+               <ModalCommentsModule__headerButton onClick={toggleModal}>
+                   <ArrowBackOutlined />
+               </ModalCommentsModule__headerButton>
+               <ModalCommentsModule__headerTitle>Comentários</ModalCommentsModule__headerTitle>
+           </ModalCommentsModule__header>
        </ModalCommentsModule> 
     )
 }
@@ -39,18 +42,31 @@ const ModalCommentsModule = styled.div`
     }
 `;
 
-const ButtonClose = styled.a`
+const ModalCommentsModule__header = styled.div`
+    width: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+`;
+
+const ModalCommentsModule__headerButton = styled.a`
     width: 30px;
     height: 30px;
     float: left;
-    position: absolute;
-    top: 5px;
-    right: 5px;
     font-size: 18px;
     color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+const ModalCommentsModule__headerTitle = styled.h2`
+    flex: 1 1 10em;
+    float: left;
+    font-size: 16px;
+    color: #000;
+    margin-left: 25px;
 `;
 
 export default Comments;
