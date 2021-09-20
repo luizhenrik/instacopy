@@ -1,11 +1,8 @@
 import { useEffect, useState, useContext } from "react";
-import styled from "styled-components";""
-import Comments from "@components/comments.module";
-import { Context } from "@context/common.context";
-
+import styled from "styled-components";
+import Router from "next/router";
+ 
 const CommentResume = ({post}) => {
-    const {modalCommentsOpened, setModalCommentsOpened} = useContext(Context);
-
     const descriptionOriginal = `<strong>${post.username}</strong> ${post.data.description} <br><a class="no-before js-open-comments">Ver todos comentarios</a>`;
 
     const [isResumed, setIsResumed] = useState(false);
@@ -28,7 +25,7 @@ const CommentResume = ({post}) => {
     const toggleResume = (e) => {
         // console.log(e.target.classList.contains("js-open-comments"));
         if(!isResumed || e.target.classList.contains("js-open-comments")) {
-            setModalCommentsOpened(post.postId);
+            Router.push(`/modal/comments`);
         }else {
             setIsResumed(false);
             e.currentTarget.innerHTML = descriptionOriginal;
@@ -36,10 +33,7 @@ const CommentResume = ({post}) => {
     }
 
     return (
-        <>
         <CommentResumeModule isResumed={isResumed} onClick={toggleResume} dangerouslySetInnerHTML={{__html: description}} />
-        <Comments post={post}/>
-        </>
     );
 };
 

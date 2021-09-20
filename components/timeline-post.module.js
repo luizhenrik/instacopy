@@ -151,7 +151,7 @@ const TimelinePost__actions = styled.div`
     float: left;
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;
+    padding: 10px 10px 5px;
     align-items: center; 
     justify-content: space-between;
 `;

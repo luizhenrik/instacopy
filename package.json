@@ -10,10 +10,12 @@
   "dependencies": {
     "@material-ui/icons": "^4.11.2",
     "abort-controller": "^3.0.0",
+    "framer-motion": "^4.1.17",
     "next": "11.1.2",
     "pexels": "^1.2.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-spring-bottom-sheet": "^3.4.0",
     "styled-components": "^5.3.1"
   },
   "devDependencies": {

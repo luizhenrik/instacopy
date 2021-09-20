@@ -12,19 +12,10 @@ export const ContextProvider = ({children}) => {
         id_user: "gH26Ijo"
     });
 
-    const setModalCommentsOpened = (id) => {
-        if(!document.querySelector(`#modalComments_${id}`).classList.contains(`is-opened`)) {
-            document.querySelector(`#modalComments_${id}`).classList.add(`is-opened`);
-        }else{
-            document.querySelector(`#modalComments_${id}`).classList.remove(`is-opened`);
-        }
-    };
-
     return (
         <Context.Provider value={{
             isLoaded,
             setIsLoaded,
-            setModalCommentsOpened,
             myUser,
             setMyUser
         }}>
