@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
+import { useSession, signOut } from 'next-auth/client';
+
 import NavBarBottom from '@components/navbar-bottom.module';
 import Header from '@components/header.module';
+import Login from '@components/login.module';
 import { useState } from 'react';
 import { motion } from 'framer-motion'
 
@@ -9,30 +12,39 @@ const Layout = ({props, children}) => {
     
     props = props || useState({});
 
+    const [session] = useSession();
+
     const variants = {
         hidden: { opacity: 0, x: 200, y: 0 },
         enter: { opacity: 1, x: 0, y: 0 },
-        exit: { opacity: 0, x: 200, y: 0 },
+        exit: { opacity: 0, x: 0, y: 0 },
+    }
+
+    const handleSignout = (e) => {
+        e.preventDefault()
+        signOut()
+    }  
+
+    if(!session) {
+        return (
+            <Container>
+                <Content>
+                    <Login />
+                </Content>
+            </Container>
+        );
     }
     
     return (
         <Container>
-            <motion.main
-                variants={variants} // Pass the variant object into Framer Motion 
-                initial="hidden" // Set the initial state to variants.hidden
-                animate="enter" // Animated state to variants.enter
-                exit="exit" // Exit state (used later) to variants.exit
-                transition={{ type: 'linear' }} // Set the transition to linear
-                className=""
-            >
-                {props.hasHeader ? (<Header />) : ('')}
-                
-                <Content>
-                    {children}
-                </Content>
-                
-                {props.hasNavBarBottom ? (<NavBarBottom />) : ('')}
-            </motion.main>
+            {!props.noHeader ? (<Header />) : ('')}
+            <a href="#" onClick={handleSignout}  className="btn-signout">Sign out</a>
+            
+            <Content>
+                {children}
+            </Content>
+            
+            {!props.noNavBarBottom ? (<NavBarBottom />) : ('')}
         </Container>
         )
     };

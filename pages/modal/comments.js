@@ -7,8 +7,8 @@ import { ArrowBackOutlined } from '@material-ui/icons';
 const Comments = () => {
 
     const layoutOptions = {
-        hasHeader: false,
-        hasNavBarBottom: false
+        noHeader: true,
+        noNavBarBottom: true
     }
 
     const closeModal = () => {
